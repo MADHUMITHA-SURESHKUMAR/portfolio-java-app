@@ -41,3 +41,22 @@ h4,bdo,p{
     text-align:left;
     
 }
+
+
+#installBtn{
+    position: fixed;
+    top: 20px;
+    right: 20px;
+
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+
+    background-color: #2196F3;
+    color: white;
+
+    font-size: 16px;
+    cursor: pointer;
+
+    z-index: 999;
+}
