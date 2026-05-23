@@ -4,9 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="/manifest.json">
 </head>
+
 <body style="background-color:rgb(0, 0, 0)">
-   <div class="navbar">
+
+<div class="navbar">
 
     <img src="logo (2).jpg" width="10%">
 
@@ -17,45 +22,77 @@
         <li>Contact</li>
     </ul>
 </div>
-<p class ="head"><b>Hi, I'm Your Name</b> <br>Your Role (E.G:Frontend and Java Developer)</p>
+
+<p class ="head">
+    <b>Hi, I'm Your Name</b><br>
+    Your Role (E.G: Frontend and Java Developer)
+</p>
+
 <div class="button">
-<button>[Hire Me]</button>
+    <button>[Hire Me]</button>
 </div>
+
+<!-- INSTALL BUTTON -->
+
+<div class="button">
+    <button id="installBtn" style="display:none;">
+        Install App
+    </button>
+</div>
+
 <h4><b> About Me</b></h4>
-<bdo>  Lorem ipsum dolor sit amet consectetur adipisicing elit.Provident adipisci consequatur laboriosam culpa facere
-   libero eligendi numquam debitis dolor aliquid. Ut earum 
-   exercitationem accusantium aut sequi, eos consequuntur 
-   facilis ea?</bdo>
+
+<bdo>
+Lorem ipsum dolor sit amet consectetur adipisicing elit.
+Provident adipisci consequatur laboriosam culpa facere
+libero eligendi numquam debitis dolor aliquid.
+Ut earum exercitationem accusantium aut sequi,
+eos consequuntur facilis ea?
+</bdo>
 
 <h4>skills:</h4>
-<p>Add your Skill's (E.G) HTML | CSS | Java |Sring Boot
+
+<p>
+Add your Skill's (E.G) HTML | CSS | Java | Spring Boot
 </p>
 
 <h4>Projects</h4>
+
 <div class="project-container">
+
 <fieldset>
     <legend>Project 1</legend>
-<p>1. Portfolio Website<br><br>
 
-Description:<br>
-Personal responsive website built using HTML and CSS to showcase my skills and projects.
-</p>
+    <p>
+        1. Portfolio Website<br><br>
+
+        Description:<br>
+        Personal responsive website built using HTML and CSS to showcase my skills and projects.
+    </p>
 </fieldset>
+
 <fieldset>
     <legend>Project 2</legend>
-<p>2. Restaurant Website<br><br>
 
-Description:<br>
-Modern restaurant landing page with menu display and contact form for bookings.</p>
+    <p>
+        2. Restaurant Website<br><br>
+
+        Description:<br>
+        Modern restaurant landing page with menu display and contact form for bookings.
+    </p>
 </fieldset>
 
 <fieldset>
     <legend>Project 3</legend>
-    <p>3. Gym Website<br><br>
 
-Description:<br>
-Fitness website with services, schedule, and membership details.</p>
+    <p>
+        3. Gym Website<br><br>
+
+        Description:<br>
+        Fitness website with services, schedule, and membership details.
+    </p>
 </fieldset>
+
 </div>
 
 <div class="contact">
@@ -64,11 +101,14 @@ Fitness website with services, schedule, and membership details.</p>
 
     <form id="contactForm">
 
-        <input type="text" id="name" placeholder="Enter Name" required><br><br>
+        <input type="text" id="name" placeholder="Enter Name" required>
+        <br><br>
 
-        <input type="email" id="email" placeholder="Enter Email" required><br><br>
+        <input type="email" id="email" placeholder="Enter Email" required>
+        <br><br>
 
-        <input type="text" id="message" placeholder="Message" required><br><br>
+        <input type="text" id="message" placeholder="Message" required>
+        <br><br>
 
         <div class="button1">
             <button type="submit">Send</button>
@@ -79,7 +119,9 @@ Fitness website with services, schedule, and membership details.</p>
 </div>
 
 <script>
+
 document.getElementById("contactForm").addEventListener("submit", async function(e){
+
     e.preventDefault();
 
     const data = {
@@ -89,36 +131,77 @@ document.getElementById("contactForm").addEventListener("submit", async function
     };
 
     try {
+
         const response = await fetch("/api/contact", {
+
             method: "POST",
+
             headers: {
                 "Content-Type": "application/json"
             },
+
             body: JSON.stringify(data)
         });
 
         const result = await response.text();
+
         alert(result);
 
         document.getElementById("contactForm").reset();
 
     } catch (error) {
+
         alert("Error connecting to backend");
+
         console.log(error);
     }
 });
 
-// Service Worker (GOOD)
+
+// SERVICE WORKER
 
 if ("serviceWorker" in navigator) {
+
     navigator.serviceWorker.register("/sw.js")
+
         .then(reg => {
             console.log("SW scope:", reg.scope);
         })
+
         .catch(err => console.log(err));
 }
+
+
+// INSTALL BUTTON
+
+let deferredPrompt;
+
+const installBtn = document.getElementById("installBtn");
+
+window.addEventListener("beforeinstallprompt", (e) => {
+
+    e.preventDefault();
+
+    deferredPrompt = e;
+
+    installBtn.style.display = "block";
+});
+
+
+installBtn.addEventListener("click", async () => {
+
+    installBtn.style.display = "none";
+
+    deferredPrompt.prompt();
+
+    const { outcome } = await deferredPrompt.userChoice;
+
+    console.log(`User response: ${outcome}`);
+
+    deferredPrompt = null;
+});
+
 </script>
-<link rel="stylesheet" href="style.css">
-<link rel="manifest" href="/manifest.json">
+
 </body>
 </html>
