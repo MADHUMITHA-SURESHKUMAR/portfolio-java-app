@@ -23,9 +23,4 @@ public class ContactController {
     public List<ContactMessage> getAllMessages() {
         return contactRepository.findAll();
     }
-    
-    @GetMapping("/messages")
-        public String viewPage() {
-            return "messages";
-        }
-    }
+}
