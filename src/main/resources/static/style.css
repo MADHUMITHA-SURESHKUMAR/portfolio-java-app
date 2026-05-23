@@ -1,0 +1,43 @@
+.navbar{
+    display:flex;
+    align-items:center;
+}
+
+ul{
+    display:flex;
+    list-style:none;
+
+    margin-left:0%;
+    margin-right:0%;
+}
+
+li{
+    color:white;
+    margin:10px;
+    
+}
+
+.head{
+    color:white;
+    text-align: center;
+ }
+.button{
+    text-align: center;
+    
+}
+
+h4,bdo,p{
+    color:white
+}
+
+.project-container{
+    display: flex;
+    justify-content: auto;
+    gap: 10px;
+    color:white
+}
+
+.contact{
+    text-align:left;
+    
+}
