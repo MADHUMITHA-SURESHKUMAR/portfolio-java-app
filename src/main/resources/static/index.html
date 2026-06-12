@@ -202,7 +202,63 @@ installBtn.addEventListener("click", async () => {
     deferredPrompt = null;
 });
 
+    // RAZORPAY PAYMENT
+
+document.getElementById("payBtn").addEventListener("click", function () {
+
+    var options = {
+        key: "rzp_test_T0eNtBXKmR4tN4",
+        amount: 50000, // ₹500
+        currency: "INR",
+
+        name: "Madhumitha Portfolio",
+
+        description: "Website Development Service",
+
+        image: "logo (2).jpg",
+
+        handler: function (response) {
+
+            alert(
+                "Payment Successful!\n\nPayment ID: " +
+                response.razorpay_payment_id
+            );
+
+            console.log("Payment ID:", response.razorpay_payment_id);
+        },
+
+        prefill: {
+            name: "",
+            email: ""
+        },
+
+        notes: {
+            service: "Portfolio Website"
+        },
+
+        theme: {
+            color: "#3399cc"
+        }
+    };
+
+    var rzp = new Razorpay(options);
+
+    rzp.on("payment.failed", function (response) {
+
+        alert(
+            "Payment Failed\n\n" +
+            response.error.description
+        );
+
+        console.log(response.error);
+    });
+
+    rzp.open();
+});
+
 </script>
+
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
 </body>
 </html>
